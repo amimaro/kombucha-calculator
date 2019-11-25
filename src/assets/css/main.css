@@ -1,0 +1,9 @@
+@import "../../../node_modules/bulma/css/bulma.css";
+
+:root {
+  --bg-img: url("../../assets/bg/wine-1237340_1280.jpg");
+}
+
+html {
+  background-color: #ebdaa3ff;
+}
