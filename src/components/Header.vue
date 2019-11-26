@@ -10,11 +10,11 @@
             >Kombucha Calculator</a>
           </h1>
           <h2 class="is-size-5 has-text-weight-light">
-            based on
+            {{$t('basedOn')}}
             <a
               href="https://www.reddit.com/r/Kombucha/comments/9udpx6/faq_and_master_recipe_check_here_first/"
               target="_blank"
-            >/r/Kombucha</a> recipe
+            >{{$t('kombuchaRecipe')}}</a>
           </h2>
         </div>
       </div>

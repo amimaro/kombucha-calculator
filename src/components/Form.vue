@@ -4,44 +4,44 @@
       <div class="media-content">
         <div class="content">
           <div class="field">
-            <label class="label">Water</label>
+            <label class="label">{{$t('water')}}</label>
             <div class="control">
               <input
                 class="input"
                 type="text"
                 v-model.lazy="water"
                 v-money="liters"
-                placeholder="Water"
+                :placeholder="$t('water')"
                 @keyup="updateWater()"
               />
             </div>
             <p
               class="help"
-              v-if="water !== '0.00 L'"
-            >Considering {{waterProportion(0.1)}} for the tea concentrate and {{waterProportion(0.9)}} of cold water.</p>
+              v-if="water !== '0.00 L' && water !== '0,00 L'"
+            >{{$t('waterRatioMessage', [waterProportion(0.1), waterProportion(0.9)])}}</p>
           </div>
           <div class="field">
-            <label class="label">Sugar</label>
+            <label class="label">{{$t('sugar')}}</label>
             <div class="control">
               <input
                 class="input"
                 type="text"
                 v-model.lazy="sugar"
                 v-money="grams"
-                placeholder="Sugar"
+                :placeholder="$t('sugar')"
                 @keyup="updateSugar()"
               />
             </div>
           </div>
           <div class="field">
-            <label class="label">Tea</label>
+            <label class="label">{{$t('tea')}}</label>
             <div class="control">
               <input
                 class="input"
                 type="text"
                 v-model.lazy="tea"
                 v-money="grams"
-                placeholder="Tea"
+                :placeholder="$t('')"
                 @keyup="updateTea()"
               />
             </div>
@@ -61,14 +61,14 @@
           </div>
           <div class="is-divider"></div>
           <div class="field">
-            <label class="label">Yields</label>
+            <label class="label">{{$t('yields')}}</label>
             <div class="control">
               <input
                 class="input"
                 type="text"
                 v-model.lazy="yields"
                 v-money="liters"
-                placeholder="Yields"
+                :placeholder="$t('yields')"
               />
             </div>
           </div>

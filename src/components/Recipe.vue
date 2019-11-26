@@ -3,27 +3,27 @@
     <article class="media">
       <div class="media-content">
         <div class="content">
-          <h2 class="is-size-5 has-text-weight-light">Recipe</h2>
+          <h2 class="is-size-5 has-text-weight-light">{{$t('recipe')}}</h2>
           <div class="columns is-centered">
             <div class="column is-one-third">
               <table class="table is-narrow is-striped">
                 <thead>
                   <tr>
-                    <th>Ingredient</th>
-                    <th class="has-text-right">Quantity</th>
+                    <th>{{$t('ingredient')}}</th>
+                    <th class="has-text-right">{{$t('quantity')}}</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td>Water</td>
+                    <td>{{$t('water')}}</td>
                     <td class="has-text-right">1 L</td>
                   </tr>
                   <tr>
-                    <td>Sugar</td>
+                    <td>{{$t('sugar')}}</td>
                     <td class="has-text-right">70 g</td>
                   </tr>
                   <tr>
-                    <td>Tea</td>
+                    <td>{{$t('tea')}}</td>
                     <td class="has-text-right">7 g</td>
                   </tr>
                   <tr>
