@@ -22,6 +22,6 @@
 
 <script>
 export default {
-  name: 'footer'
+  name: 'KombuchaFooter'
 }
 </script>

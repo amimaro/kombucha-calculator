@@ -24,6 +24,6 @@
 
 <script>
 export default {
-  name: 'header'
+  name: 'KombuchaHeader'
 }
 </script>

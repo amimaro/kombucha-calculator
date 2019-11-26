@@ -4,88 +4,64 @@
       <div class="media-content">
         <div class="content">
           <div class="field">
-            <label class="label">Name</label>
+            <label class="label">Water</label>
             <div class="control">
-              <input class="input" type="text" placeholder="Text input" />
+              <input
+                class="input"
+                type="text"
+                v-model.lazy="form.water"
+                v-money="liters"
+                placeholder="Water"
+              />
             </div>
           </div>
-
           <div class="field">
-            <label class="label">Username</label>
-            <div class="control has-icons-left has-icons-right">
-              <input class="input is-success" type="text" placeholder="Text input" value="bulma" />
-              <span class="icon is-small is-left">
-                <i class="fas fa-user"></i>
-              </span>
-              <span class="icon is-small is-right">
-                <i class="fas fa-check"></i>
-              </span>
+            <label class="label">Sugar</label>
+            <div class="control">
+              <input
+                class="input"
+                type="text"
+                v-model.lazy="form.sugar"
+                v-money="grams"
+                placeholder="Sugar"
+              />
             </div>
-            <p class="help is-success">This username is available</p>
           </div>
-
           <div class="field">
-            <label class="label">Email</label>
-            <div class="control has-icons-left has-icons-right">
-              <input class="input is-danger" type="email" placeholder="Email input" value="hello@" />
-              <span class="icon is-small is-left">
-                <i class="fas fa-envelope"></i>
-              </span>
-              <span class="icon is-small is-right">
-                <i class="fas fa-exclamation-triangle"></i>
-              </span>
+            <label class="label">Tea</label>
+            <div class="control">
+              <input
+                class="input"
+                type="text"
+                v-model.lazy="form.tea"
+                v-money="grams"
+                placeholder="Tea"
+              />
             </div>
-            <p class="help is-danger">This email is invalid</p>
           </div>
-
           <div class="field">
-            <label class="label">Subject</label>
+            <label class="label">Starter</label>
             <div class="control">
-              <div class="select">
-                <select>
-                  <option>Select dropdown</option>
-                  <option>With options</option>
-                </select>
-              </div>
+              <input
+                class="input"
+                type="text"
+                v-model.lazy="form.starter"
+                v-money="liters"
+                placeholder="Starter"
+              />
             </div>
           </div>
-
+          <div class="is-divider"></div>
           <div class="field">
-            <label class="label">Message</label>
+            <label class="label">Yields</label>
             <div class="control">
-              <textarea class="textarea" placeholder="Textarea"></textarea>
-            </div>
-          </div>
-
-          <div class="field">
-            <div class="control">
-              <label class="checkbox">
-                <input type="checkbox" />
-                I agree to the
-                <a href="#">terms and conditions</a>
-              </label>
-            </div>
-          </div>
-
-          <div class="field">
-            <div class="control">
-              <label class="radio">
-                <input type="radio" name="question" />
-                Yes
-              </label>
-              <label class="radio">
-                <input type="radio" name="question" />
-                No
-              </label>
-            </div>
-          </div>
-
-          <div class="field is-grouped">
-            <div class="control">
-              <button class="button is-link">Submit</button>
-            </div>
-            <div class="control">
-              <button class="button is-link is-light">Cancel</button>
+              <input
+                class="input"
+                type="text"
+                v-model.lazy="form.yields"
+                v-money="liters"
+                placeholder="Yields"
+              />
             </div>
           </div>
         </div>
@@ -95,7 +71,49 @@
 </template>
 
 <script>
+import { VMoney } from 'v-money'
+
 export default {
-  name: 'form'
+  name: 'KombuchaForm',
+  directives: { money: VMoney },
+  data () {
+    let decimal, thousands
+    if (this.$route.query.l === 'pt-br') {
+      decimal = ','
+      thousands = '.'
+    } else {
+      decimal = '.'
+      thousands = ','
+    }
+    return {
+      form: {
+        water: 0,
+        sugar: 0,
+        tea: 0,
+        starter: 0,
+        yields: 0
+      },
+      liters: {
+        decimal,
+        thousands,
+        suffix: ' L',
+        precision: 2
+      },
+      grams: {
+        decimal,
+        thousands,
+        suffix: ' g',
+        precision: 0
+      }
+    }
+  },
+  watch: {
+    form: {
+      handler: function (v) {
+        console.log(JSON.stringify(v))
+      },
+      deep: true
+    }
+  }
 }
 </script>
