@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.63430f44febbebb9fbb31bd8772a6e9f.js"
+  "precache-manifest.b9cf54462fffcedcad5a5fa66e719d2d.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "kombucha-calculator"});
