@@ -16,19 +16,19 @@
                 <tbody>
                   <tr>
                     <td>{{$t('water')}}</td>
-                    <td class="has-text-right">1 L</td>
+                    <td class="has-text-right">{{recipe.water}} L</td>
                   </tr>
                   <tr>
                     <td>{{$t('sugar')}}</td>
-                    <td class="has-text-right">70 g</td>
+                    <td class="has-text-right">{{recipe.sugar * 1000}} g</td>
                   </tr>
                   <tr>
                     <td>{{$t('tea')}}</td>
-                    <td class="has-text-right">7 g</td>
+                    <td class="has-text-right">{{recipe.tea * 1000}} g</td>
                   </tr>
                   <tr>
                     <td>Starter</td>
-                    <td class="has-text-right">100 mL</td>
+                    <td class="has-text-right">{{recipe.starter * 1000}} mL</td>
                   </tr>
                 </tbody>
               </table>
@@ -41,7 +41,12 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
-  name: 'KombuchaRecipe'
+  name: 'KombuchaRecipe',
+  computed: {
+    ...mapState(['recipe'])
+  }
 }
 </script>

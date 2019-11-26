@@ -80,10 +80,14 @@
 
 <script>
 import { VMoney } from 'v-money'
+import { mapState } from 'vuex'
 
 export default {
   name: 'KombuchaForm',
   directives: { money: VMoney },
+  computed: {
+    ...mapState(['recipe'])
+  },
   data () {
     let lang = ''
     let decimal, thousands
@@ -114,12 +118,6 @@ export default {
         thousands,
         suffix: ' g',
         precision: 0
-      },
-      recipe: {
-        water: 1,
-        sugar: 0.07,
-        tea: 0.005,
-        starter: 0.1
       }
     }
   },
