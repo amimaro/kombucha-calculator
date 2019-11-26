@@ -9,11 +9,16 @@
               <input
                 class="input"
                 type="text"
-                v-model.lazy="form.water"
+                v-model.lazy="water"
                 v-money="liters"
                 placeholder="Water"
+                @keyup="updateWater()"
               />
             </div>
+            <p
+              class="help"
+              v-if="water !== '0.00 L'"
+            >Considering {{waterProportion(0.1)}} for the tea concentrate and {{waterProportion(0.9)}} of cold water.</p>
           </div>
           <div class="field">
             <label class="label">Sugar</label>
@@ -21,7 +26,7 @@
               <input
                 class="input"
                 type="text"
-                v-model.lazy="form.sugar"
+                v-model.lazy="sugar"
                 v-money="grams"
                 placeholder="Sugar"
               />
@@ -30,13 +35,7 @@
           <div class="field">
             <label class="label">Tea</label>
             <div class="control">
-              <input
-                class="input"
-                type="text"
-                v-model.lazy="form.tea"
-                v-money="grams"
-                placeholder="Tea"
-              />
+              <input class="input" type="text" v-model.lazy="tea" v-money="grams" placeholder="Tea" />
             </div>
           </div>
           <div class="field">
@@ -45,7 +44,7 @@
               <input
                 class="input"
                 type="text"
-                v-model.lazy="form.starter"
+                v-model.lazy="starter"
                 v-money="liters"
                 placeholder="Starter"
               />
@@ -58,7 +57,7 @@
               <input
                 class="input"
                 type="text"
-                v-model.lazy="form.yields"
+                v-model.lazy="yields"
                 v-money="liters"
                 placeholder="Yields"
               />
@@ -77,22 +76,24 @@ export default {
   name: 'KombuchaForm',
   directives: { money: VMoney },
   data () {
+    let lang = ''
     let decimal, thousands
     if (this.$route.query.l === 'pt-br') {
       decimal = ','
       thousands = '.'
+      lang = 'pt-br'
     } else {
       decimal = '.'
       thousands = ','
+      lang = 'en-us'
     }
     return {
-      form: {
-        water: 0,
-        sugar: 0,
-        tea: 0,
-        starter: 0,
-        yields: 0
-      },
+      lang,
+      water: 0,
+      sugar: 0,
+      tea: 0,
+      starter: 0,
+      yields: 0,
       liters: {
         decimal,
         thousands,
@@ -107,13 +108,36 @@ export default {
       }
     }
   },
-  watch: {
-    form: {
-      handler: function (v) {
-        console.log(JSON.stringify(v))
-      },
-      deep: true
+  methods: {
+    toNumber: function (v) {
+      if (typeof v !== 'string') return
+      if (this.lang === 'en-us') return parseFloat(v.replace(/,/g, ''))
+      else return parseFloat(v.replace(/\./g, '').replace(/,/g, '.'))
+    },
+    waterProportion: function (proportion) {
+      let quantity = (this.toNumber(this.water) * proportion)
+      if (quantity < 1) quantity = (quantity * 1000).toFixed(0) + ' mL'
+      else quantity = quantity.toFixed(2) + ' L'
+      if (this.lang === 'pt-br') quantity = quantity.replace(/\./, ',')
+      return quantity
+    },
+    updateWater: function () {
+      this.starter = (this.toNumber(this.water) * 0.1).toFixed(2)
+      this.sugar = (this.toNumber(this.water) * 0.7).toFixed(2)
+      this.tea = (this.toNumber(this.water) * 0.05).toFixed(2)
+      this.yields = (this.toNumber(this.water) + this.toNumber(this.water) * 0.1).toFixed(2)
     }
   }
+  // watch: {
+  //   water: function (v) {
+  //     this.starter = (this.toNumber(v) * 0.1).toFixed(2)
+  //     this.sugar = (this.toNumber(v) * 0.7).toFixed(2)
+  //     this.tea = (this.toNumber(v) * 0.05).toFixed(2)
+  //     this.yields = (this.toNumber(v) + this.toNumber(v) * 0.1).toFixed(2)
+  //   },
+  //   sugar: function (v) {
+  //     this.water = (this.toNumber(v) * 2).toFixed(2)
+  //   }
+  // }
 }
 </script>
