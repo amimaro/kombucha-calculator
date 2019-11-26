@@ -5,6 +5,7 @@
         <div class="container">
           <Header />
           <Form />
+          <Recipe />
           <Footer />
         </div>
       </div>
@@ -17,12 +18,14 @@
 import Form from '@/components/Form'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import Recipe from '@/components/Recipe'
 
 export default {
   name: 'home',
   components: {
-    Form,
     Header,
+    Form,
+    Recipe,
     Footer
   }
 }
