@@ -8,7 +8,7 @@
             <div class="control">
               <input
                 class="input"
-                type="text"
+                type="tel"
                 v-model.lazy="water"
                 v-money="liters"
                 :placeholder="$t('water')"
@@ -25,7 +25,7 @@
             <div class="control">
               <input
                 class="input"
-                type="text"
+                type="tel"
                 v-model.lazy="sugar"
                 v-money="grams"
                 :placeholder="$t('sugar')"
@@ -38,7 +38,7 @@
             <div class="control">
               <input
                 class="input"
-                type="text"
+                type="tel"
                 v-model.lazy="tea"
                 v-money="grams"
                 :placeholder="$t('')"
@@ -51,7 +51,7 @@
             <div class="control">
               <input
                 class="input"
-                type="text"
+                type="tel"
                 v-model.lazy="starter"
                 v-money="liters"
                 placeholder="Starter"
@@ -65,7 +65,7 @@
             <div class="control">
               <input
                 class="input"
-                type="text"
+                type="tel"
                 v-model.lazy="yields"
                 v-money="liters"
                 :placeholder="$t('yields')"
