@@ -1,7 +1,9 @@
 @import "../../../node_modules/bulma/css/bulma.css";
+@import "../../../node_modules/bulma-divider/dist/css/bulma-divider.min.css";
 
 :root {
   --bg-img: url("../../assets/bg/wine-1237340_1280.jpg");
+  --divider-color: red;
 }
 
 html {
