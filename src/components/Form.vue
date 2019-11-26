@@ -118,7 +118,7 @@ export default {
       recipe: {
         water: 1,
         sugar: 0.07,
-        tea: 0.007,
+        tea: 0.005,
         starter: 0.1
       }
     }
