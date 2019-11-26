@@ -55,6 +55,7 @@
                 v-model.lazy="starter"
                 v-money="liters"
                 placeholder="Starter"
+                @keyup="updateStarter()"
               />
             </div>
           </div>
@@ -145,6 +146,12 @@ export default {
       this.water = (this.toNumber(this.tea) * (1 / 5)).toFixed(2)
       this.starter = (this.toNumber(this.tea) * (0.1 / 5)).toFixed(2)
       this.sugar = (this.toNumber(this.tea) * (70 / 5) / 100).toFixed(2)
+      this.yields = (this.toNumber(this.water) + this.toNumber(this.water) * 0.1).toFixed(2)
+    },
+    updateStarter: function () {
+      this.water = (this.toNumber(this.starter) * (1 / 0.1)).toFixed(2)
+      this.tea = (this.toNumber(this.starter) * (5 * 0.1)).toFixed(2)
+      this.sugar = (this.toNumber(this.starter) * (70 * 0.1)).toFixed(2)
       this.yields = (this.toNumber(this.water) + this.toNumber(this.water) * 0.1).toFixed(2)
     }
   }
