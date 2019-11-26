@@ -36,7 +36,14 @@
           <div class="field">
             <label class="label">Tea</label>
             <div class="control">
-              <input class="input" type="text" v-model.lazy="tea" v-money="grams" placeholder="Tea" />
+              <input
+                class="input"
+                type="text"
+                v-model.lazy="tea"
+                v-money="grams"
+                placeholder="Tea"
+                @keyup="updateTea()"
+              />
             </div>
           </div>
           <div class="field">
@@ -132,6 +139,12 @@ export default {
       this.water = (this.toNumber(this.sugar) * 0.014285714286).toFixed(2)
       this.starter = (this.toNumber(this.sugar) * 0.0014285714286).toFixed(2)
       this.tea = (this.toNumber(this.sugar) * 0.00071428571).toFixed(2)
+      this.yields = (this.toNumber(this.water) + this.toNumber(this.water) * 0.1).toFixed(2)
+    },
+    updateTea: function () {
+      this.water = (this.toNumber(this.tea) * (1 / 5)).toFixed(2)
+      this.starter = (this.toNumber(this.tea) * (0.1 / 5)).toFixed(2)
+      this.sugar = (this.toNumber(this.tea) * (70 / 5) / 100).toFixed(2)
       this.yields = (this.toNumber(this.water) + this.toNumber(this.water) * 0.1).toFixed(2)
     }
   }
