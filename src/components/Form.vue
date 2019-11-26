@@ -29,6 +29,7 @@
                 v-model.lazy="sugar"
                 v-money="grams"
                 placeholder="Sugar"
+                @keyup="updateSugar()"
               />
             </div>
           </div>
@@ -125,6 +126,12 @@ export default {
       this.starter = (this.toNumber(this.water) * 0.1).toFixed(2)
       this.sugar = (this.toNumber(this.water) * 0.7).toFixed(2)
       this.tea = (this.toNumber(this.water) * 0.05).toFixed(2)
+      this.yields = (this.toNumber(this.water) + this.toNumber(this.water) * 0.1).toFixed(2)
+    },
+    updateSugar: function () {
+      this.water = (this.toNumber(this.sugar) * 0.014285714286).toFixed(2)
+      this.starter = (this.toNumber(this.sugar) * 0.0014285714286).toFixed(2)
+      this.tea = (this.toNumber(this.sugar) * 0.00071428571).toFixed(2)
       this.yields = (this.toNumber(this.water) + this.toNumber(this.water) * 0.1).toFixed(2)
     }
   }
