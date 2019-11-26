@@ -9,7 +9,7 @@ export default new Vuex.Store({
       water: 1,
       sugar: 0.07,
       tea: 0.006,
-      starter: 0.2
+      starter: 0.1
     }
   },
   mutations: {
