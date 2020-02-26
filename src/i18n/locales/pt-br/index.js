@@ -3,7 +3,7 @@
 
 export default {
   water: 'Água',
-  sugar: 'Açucar',
+  sugar: 'Açúcar',
   tea: 'Chá',
   yields: 'Rendimento',
   recipe: 'Receita',
