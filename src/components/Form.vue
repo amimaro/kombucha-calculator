@@ -4,6 +4,19 @@
       <div class="media-content">
         <div class="content">
           <div class="field">
+            <label class="label">{{$t('wizardTitle')}}</label>
+            <div class="control">
+              <input
+                class="input"
+                type="tel"
+                v-model.lazy="wizard"
+                v-money="liters"
+                @keyup="updateWizard()"
+              />
+            </div>
+          </div>
+          <div class="is-divider"></div>
+          <div class="field">
             <label class="label">{{$t('water')}}</label>
             <div class="control">
               <input
@@ -69,6 +82,7 @@
                 v-model.lazy="yields"
                 v-money="liters"
                 :placeholder="$t('yields')"
+                @keyup="updateYields()"
               />
             </div>
           </div>
@@ -102,6 +116,7 @@ export default {
     }
     return {
       lang,
+      wizard: 0,
       water: 0,
       sugar: 0,
       tea: 0,
@@ -135,10 +150,10 @@ export default {
       return quantity
     },
     updateWater: function () {
-      this.starter = (this.toNumber(this.water) * this.recipe.starter).toFixed(2)
-      this.sugar = (this.toNumber(this.water) * this.recipe.sugar * 10).toFixed(2)
-      this.tea = (this.toNumber(this.water) * this.recipe.tea * 10).toFixed(2)
-      this.yields = (this.toNumber(this.water) + this.toNumber(this.water) * this.recipe.starter).toFixed(2)
+      this.starter = (this.toNumber(this.water) * 0.01 * (this.recipe.water / this.recipe.starter)).toFixed(2)
+      this.tea = (this.toNumber(this.starter) * (this.recipe.tea / this.recipe.starter * 10)).toFixed(2)
+      this.sugar = (this.toNumber(this.starter) * (this.recipe.sugar / this.recipe.starter * 10)).toFixed(2)
+      this.yields = (this.toNumber(this.water) + this.toNumber(this.starter)).toFixed(2)
     },
     updateSugar: function () {
       this.water = (this.toNumber(this.sugar) * (this.recipe.water / this.recipe.sugar / 1000)).toFixed(2)
@@ -157,6 +172,19 @@ export default {
       this.tea = (this.toNumber(this.starter) * (this.recipe.tea / this.recipe.starter * 10)).toFixed(2)
       this.sugar = (this.toNumber(this.starter) * (this.recipe.sugar / this.recipe.starter * 10)).toFixed(2)
       this.yields = (this.toNumber(this.water) + this.toNumber(this.water) * this.recipe.starter).toFixed(2)
+    },
+    updateYields: function () {
+      this.water = (this.toNumber(this.yields) * 0.09 * (this.recipe.water / this.recipe.starter)).toFixed(2)
+      this.starter = (this.toNumber(this.yields) * 0.01 * (this.recipe.water / this.recipe.starter)).toFixed(2)
+      this.tea = (this.toNumber(this.starter) * (this.recipe.tea / this.recipe.starter * 10)).toFixed(2)
+      this.sugar = (this.toNumber(this.starter) * (this.recipe.sugar / this.recipe.starter * 10)).toFixed(2)
+    },
+    updateWizard: function () {
+      this.water = (this.toNumber(this.wizard) * 0.09 * (this.recipe.water / this.recipe.starter)).toFixed(2)
+      this.starter = (this.toNumber(this.wizard) * 0.01 * (this.recipe.water / this.recipe.starter)).toFixed(2)
+      this.tea = (this.toNumber(this.starter) * (this.recipe.tea / this.recipe.starter * 10)).toFixed(2)
+      this.sugar = (this.toNumber(this.starter) * (this.recipe.sugar / this.recipe.starter * 10)).toFixed(2)
+      this.yields = (this.toNumber(this.water) + this.toNumber(this.starter)).toFixed(2)
     }
   }
 }
