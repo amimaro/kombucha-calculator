@@ -139,8 +139,7 @@ export default {
   methods: {
     toNumber: function (v) {
       if (typeof v !== 'string') return
-      if (this.lang === 'en-us') return parseFloat(v.replace(/,/g, ''))
-      else return parseFloat(v.replace(/\./g, '').replace(/,/g, '.'))
+      return parseFloat(v)
     },
     waterProportion: function (proportion) {
       let quantity = (this.toNumber(this.water) * proportion)
