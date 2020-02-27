@@ -100,7 +100,25 @@ export default {
   name: 'KombuchaForm',
   directives: { money: VMoney },
   computed: {
-    ...mapState(['recipe'])
+    ...mapState(['recipe']),
+    _water () {
+      return this.toNumber(this.water)
+    },
+    _starter () {
+      return this.toNumber(this.starter)
+    },
+    _sugar () {
+      return this.toNumber(this.sugar)
+    },
+    _tea () {
+      return this.toNumber(this.tea)
+    },
+    _yields () {
+      return this.toNumber(this.yields)
+    },
+    _wizard () {
+      return this.toNumber(this.wizard)
+    }
   },
   data () {
     let lang = ''
@@ -142,48 +160,48 @@ export default {
       return parseFloat(v)
     },
     waterProportion: function (proportion) {
-      let quantity = (this.toNumber(this.water) * proportion)
+      let quantity = (this._water * proportion)
       if (quantity < 1) quantity = (quantity * 1000).toFixed(0) + ' mL'
       else quantity = quantity.toFixed(2) + ' L'
       if (this.lang === 'pt-br') quantity = quantity.replace(/\./, ',')
       return quantity
     },
     updateWater: function () {
-      this.starter = (this.toNumber(this.water) * 0.01 * (this.recipe.water / this.recipe.starter)).toFixed(2)
-      this.tea = (this.toNumber(this.starter) * (this.recipe.tea / this.recipe.starter * 10)).toFixed(2)
-      this.sugar = (this.toNumber(this.starter) * (this.recipe.sugar / this.recipe.starter * 10)).toFixed(2)
-      this.yields = (this.toNumber(this.water) + this.toNumber(this.starter)).toFixed(2)
+      this.starter = (this._water * (this.recipe.starter / this.recipe.water)).toFixed(2)
+      this.tea = (this._water * (this.recipe.tea / this.recipe.water * 10)).toFixed(2)
+      this.sugar = (this._water * (this.recipe.sugar / this.recipe.water * 10)).toFixed(2)
+      this.yields = (this._water + this._starter).toFixed(2)
     },
     updateSugar: function () {
-      this.water = (this.toNumber(this.sugar) * (this.recipe.water / this.recipe.sugar / 1000)).toFixed(2)
-      this.starter = (this.toNumber(this.sugar) * (this.recipe.starter / this.recipe.sugar / 1000)).toFixed(2)
-      this.tea = (this.toNumber(this.sugar) * (this.recipe.tea / this.recipe.sugar / 100)).toFixed(2)
-      this.yields = (this.toNumber(this.water) + this.toNumber(this.water) * this.recipe.starter).toFixed(2)
+      this.water = (this._sugar * (this.recipe.water / this.recipe.sugar / 1000)).toFixed(2)
+      this.starter = (this._sugar * (this.recipe.starter / this.recipe.sugar / 1000)).toFixed(2)
+      this.tea = (this._sugar * (this.recipe.tea / this.recipe.sugar / 100)).toFixed(2)
+      this.yields = (this._water + this._starter).toFixed(2)
     },
     updateTea: function () {
-      this.water = (this.toNumber(this.tea) * (this.recipe.water / this.recipe.tea / 1000)).toFixed(2)
-      this.starter = (this.toNumber(this.tea) * (this.recipe.starter / this.recipe.tea / 1000)).toFixed(2)
-      this.sugar = (this.toNumber(this.tea) * (this.recipe.sugar / this.recipe.tea / 100)).toFixed(2)
-      this.yields = (this.toNumber(this.water) + this.toNumber(this.water) * this.recipe.starter).toFixed(2)
+      this.water = (this._tea * (this.recipe.water / this.recipe.tea / 1000)).toFixed(2)
+      this.starter = (this._tea * (this.recipe.starter / this.recipe.tea / 1000)).toFixed(2)
+      this.sugar = (this._tea * (this.recipe.sugar / this.recipe.tea / 100)).toFixed(2)
+      this.yields = (this._water + this._starter).toFixed(2)
     },
     updateStarter: function () {
-      this.water = (this.toNumber(this.starter) * (this.recipe.water / this.recipe.starter)).toFixed(2)
-      this.tea = (this.toNumber(this.starter) * (this.recipe.tea / this.recipe.starter * 10)).toFixed(2)
-      this.sugar = (this.toNumber(this.starter) * (this.recipe.sugar / this.recipe.starter * 10)).toFixed(2)
-      this.yields = (this.toNumber(this.water) + this.toNumber(this.water) * this.recipe.starter).toFixed(2)
+      this.water = (this._starter * (this.recipe.water / this.recipe.starter)).toFixed(2)
+      this.tea = (this._starter * (this.recipe.tea / this.recipe.starter * 10)).toFixed(2)
+      this.sugar = (this._starter * (this.recipe.sugar / this.recipe.starter * 10)).toFixed(2)
+      this.yields = (this._water + this._starter).toFixed(2)
     },
     updateYields: function () {
-      this.water = (this.toNumber(this.yields) * 0.09 * (this.recipe.water / this.recipe.starter)).toFixed(2)
-      this.starter = (this.toNumber(this.yields) * 0.01 * (this.recipe.water / this.recipe.starter)).toFixed(2)
-      this.tea = (this.toNumber(this.starter) * (this.recipe.tea / this.recipe.starter * 10)).toFixed(2)
-      this.sugar = (this.toNumber(this.starter) * (this.recipe.sugar / this.recipe.starter * 10)).toFixed(2)
+      this.water = (this._yields * 0.9).toFixed(2)
+      this.starter = (this._water * (this.recipe.starter / this.recipe.water)).toFixed(2)
+      this.tea = (this._starter * (this.recipe.tea / this.recipe.starter * 10)).toFixed(2)
+      this.sugar = (this._starter * (this.recipe.sugar / this.recipe.starter * 10)).toFixed(2)
     },
     updateWizard: function () {
-      this.water = (this.toNumber(this.wizard) * 0.09 * (this.recipe.water / this.recipe.starter)).toFixed(2)
-      this.starter = (this.toNumber(this.wizard) * 0.01 * (this.recipe.water / this.recipe.starter)).toFixed(2)
-      this.tea = (this.toNumber(this.starter) * (this.recipe.tea / this.recipe.starter * 10)).toFixed(2)
-      this.sugar = (this.toNumber(this.starter) * (this.recipe.sugar / this.recipe.starter * 10)).toFixed(2)
-      this.yields = (this.toNumber(this.water) + this.toNumber(this.starter)).toFixed(2)
+      this.water = (this._wizard * 0.9).toFixed(2)
+      this.starter = (this._water * (this.recipe.starter / this.recipe.water)).toFixed(2)
+      this.tea = (this._starter * (this.recipe.tea / this.recipe.starter * 10)).toFixed(2)
+      this.sugar = (this._starter * (this.recipe.sugar / this.recipe.starter * 10)).toFixed(2)
+      this.yields = (this._water + this._starter).toFixed(2)
     }
   }
 }

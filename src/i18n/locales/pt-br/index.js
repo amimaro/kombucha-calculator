@@ -12,5 +12,6 @@ export default {
   basedOn: 'baseado em',
   kombuchaRecipe: '/r/Kombucha',
   waterRatioMessage: 'Considerando {0} para o chá concentrado e {1} de água gelada.',
-  wizardTitle: 'Quantos litros de kombucha você pretende fazer?'
+  wizardTitle: 'Quantos litros de kombucha você pretende fazer?',
+  recipeHelper: 'Você também pode configurar a sua receita nos campos da tabela.'
 }
